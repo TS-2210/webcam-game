@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>My game</h1>
+      <p class="instructions"></p>
+      <div class="canvas-wrapper">
+        <video id="webcam" autoplay playsinline></video>
+        <canvas id="gameCanvas" width="640" height="480"></canvas>
+        <div id="overlay" class="overlay">
+          <h2 id="overlayMessage">Ready to Play?</h2>
+          <button id="startButton">Start Game</button>
+        </div>
+      </div>
+      <div id="scoreDisplay">
+        <p>Time: <span id="score">0</span>s</p>
+      </div>
+    </div>
+    <div id="loadingOverlay" class="loading-overlay hidden">
+      <div class="loading-content">
+        <div class="loader"></div>
+        <h2>Loading game</h2>
+        <p id="loadingStatus">Loading TensorFlow.js models...</p>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/hand-pose-detection"></script>
+    <script src="handTracking.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>
