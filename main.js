@@ -1,0 +1,43 @@
+const config = {
+  ballCount: 1,
+  ballRadius: 20,
+  gravity: 0.2,
+  bounceVelocity: -8,
+  handRadius: 50,
+  countdownTime: 3,
+};
+
+let gameState = {
+  balls: [],
+  hands: [],
+  score: 0,
+  gameOver: false,
+  startTime: null,
+  animationId: null,
+  countdown: 0,
+  isCountingDown: false,
+};
+
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+const overlay = document.getElementById("overlay");
+const startButton = document.getElementById("startButton");
+const scoreDisplay = document.getElementById("score");
+const overlayMessage = document.getElementById("overlayMessage");
+const loadingOverlay = document.getElementById("loadingOverlay");
+const loadingStatus = document.getElementById("loadingStatus");
+
+function initBalls() {
+  gameState.balls = [];
+  for (let i = 0; i < config.ballCount; i++) {
+    gameState.balls.push({
+      x: canvas.width / 2,
+      y: 100,
+      vx: 0,
+      vy: 0,
+      radius: config.ballRadius,
+      color: `hsl(${i * 120}, 70%, 60%)`,
+    });
+  }
+}
