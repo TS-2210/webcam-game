@@ -41,3 +41,43 @@ function initBalls() {
     });
   }
 }
+
+function updateBalls() {
+  gameState.balls.forEach((ball) => {
+    ball.vy += config.gravity;
+    ball.x += ball.vx;
+    ball.y += ball.vy;
+
+    if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
+      ball.vx *= -1;
+      ball.x =
+        ball.x < canvas.width / 2 ? ball.radius : canvas.width - ball.radius;
+    }
+
+    if (ball.y - ball.radius < 0) {
+      ball.vy *= -1;
+      ball.y = ball.radius;
+    }
+  });
+}
+
+function checkCollisions() {
+  gameState.balls.forEach((ball) => {
+    gameState.hands.forEach((hand) => {
+      const dx = ball.x - hand.x;
+      const dy = ball.y - hand.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < ball.radius + config.handRadius) {
+        ball.vy = config.bounceVelocity;
+        ball.vx += dx * 0.1;
+        const angle = Math.atan2(dy, dx);
+        const targetX =
+          hand.x + Math.cos(angle) * (ball.radius + config.handRadius);
+        const targetY =
+          hand.y + Math.sin(angle) * (ball.radius + config.handRadius);
+        ball.x = targetX;
+        ball.y = targetY;
+      }
+    });
+  });
+}
